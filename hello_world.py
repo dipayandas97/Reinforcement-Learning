@@ -20,5 +20,4 @@ for _ in range(1000):
     	print(reward)
 
     print(env_state, reward, dead, info)
-    #time.sleep(0.1)
 
