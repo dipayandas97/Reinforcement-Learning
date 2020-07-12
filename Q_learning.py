@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import random
 
 episodes = 100000
-epsilon = 0.8
+epsilon = 1
+epsilon_min = 0.001
+epsilon_decay = 0.999
 lr = 0.1
 gamma = 0.6
 
@@ -29,7 +31,9 @@ for episode in range(episodes):
 
     epsilons.append(epsilon)
     
-    #epsilon = (1 - episode/episodes) * epsilon
+    if epsilon > epsilon_min:
+        epsilon *= epsilon_decay
+    
     dead = False
 
     while not dead:
@@ -101,7 +105,6 @@ for _ in range(episodes):
 
     total_penalties += penalties
     total_epochs += epochs
-    print(penalties, epochs)
 
 print(f"Results after {episodes} episodes:")
 print(f"Average timesteps per episode: {total_epochs / episodes}")
